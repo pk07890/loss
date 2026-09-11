@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>加工一股餘料統計</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --bg:#efece2;
+    --surface:#fdfcf8;
+    --ink:#22262b;
+    --muted:#6b6f76;
+    --steel:#3e5c6e;
+    --steel-dark:#2b4351;
+    --rust:#b25a2e;
+    --rust-soft:#e8dccb;
+    --line:#d8d2c1;
+    --line-strong:#b9b29d;
+    --danger:#a13a2e;
+    --ok:#3e6e4f;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:28px 20px 80px;}
+
+  /* ---- Header ---- */
+  header.top{
+    background:var(--steel-dark);
+    color:#f2efe4;
+    padding:26px 24px;
+    border-bottom:4px solid var(--rust);
+  }
+  header.top .inner{max-width:1040px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;}
+  header.top h1{
+    font-family:"Noto Serif TC",serif;
+    font-weight:700;
+    font-size:26px;
+    margin:0;
+    letter-spacing:.02em;
+  }
+  header.top .sub{
+    font-size:13px;
+    color:#c9cdd2;
+    margin-top:4px;
+  }
+  header.top .today{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px;
+    color:#e8dccb;
+    text-align:right;
+  }
+
+  /* ---- Stat strip ---- */
+  .stats{
+    display:flex;
+    background:var(--surface);
+    border:1px solid var(--line);
+    margin-top:22px;
+  }
+  .stat{
+    flex:1;
+    padding:16px 18px;
+    border-right:1px solid var(--line);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .label{font-size:12.5px;color:var(--muted);}
+  .stat .value{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:24px;
+    font-weight:500;
+    margin-top:4px;
+    color:var(--steel-dark);
+  }
+  .stat.warn .value{color:var(--rust);}
+
+  /* ---- Section ---- */
+  section{margin-top:34px;}
+  h2{
+    font-family:"Noto Serif TC",serif;
+    font-size:18px;
+    font-weight:700;
+    margin:0 0 14px;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  h2 .hint{font-family:"Noto Sans TC",sans-serif;font-weight:400;font-size:12.5px;color:var(--muted);}
+
+  /* ---- Form ---- */
+  .panel{background:var(--surface);border:1px solid var(--line);padding:20px;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .grid .full{grid-column:1/-1;}
+  @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  .field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:4px;}
+  .field input, .field select{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid var(--line-strong);
+    background:#fff;
+    font-size:14.5px;
+    font-family:inherit;
+    color:var(--ink);
+  }
+  input[type="file"]{
+    font-size:13px;
+    font-family:inherit;
+    max-width:340px;
+  }
+  .field input:focus, .field select:focus{outline:2px solid var(--steel);outline-offset:1px;}
+  .form-actions{margin-top:16px;display:flex;gap:10px;align-items:center;}
+  button{
+    font-family:"Noto Sans TC",sans-serif;
+    font-size:14px;
+    cursor:pointer;
+    border:none;
+    padding:10px 20px;
+    background:var(--steel);
+    color:#fff;
+  }
+  button:hover{background:var(--steel-dark);}
+  button.secondary{background:transparent;color:var(--steel-dark);border:1px solid var(--line-strong);}
+  button.secondary:hover{background:var(--rust-soft);}
+  button.danger-text{background:none;color:var(--danger);border:none;padding:4px 8px;text-decoration:underline;}
+  button.link{background:none;color:var(--steel-dark);border:none;padding:4px 8px;text-decoration:underline;}
+  .editing-flag{font-size:13px;color:var(--rust);display:none;}
+  .section-toggle{
+    background:none;
+    border:1px solid var(--line-strong);
+    color:var(--steel-dark);
+    font-family:"Noto Sans TC",sans-serif;
+    font-size:12.5px;
+    padding:4px 12px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .section-toggle:hover{background:var(--rust-soft);}
+  .section-body.collapsed{display:none;}
+
+  /* ---- Filter bar ---- */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:flex-end;}
+  .filters .field{min-width:150px;}
+  .filters .grow{flex:1;min-width:180px;}
+
+  /* ---- Table ---- */
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);}
+  table{border-collapse:collapse;width:100%;min-width:900px;background:var(--surface);}
+  thead th{
+    background:var(--steel-dark);
+    color:#eee;
+    font-size:12.5px;
+    font-weight:500;
+    text-align:left;
+    padding:10px 10px;
+    white-space:nowrap;
+  }
+  tbody td{
+    padding:9px 10px;
+    border-bottom:1px solid var(--line);
+    font-size:13.5px;
+    white-space:nowrap;
+  }
+  tbody tr:hover{background:#f5f2e9;}
+  td.num, th.num{text-align:right;font-family:"IBM Plex Mono",monospace;}
+  td.note{white-space:normal;min-width:160px;color:var(--muted);font-size:13px;}
+  .empty-row td{text-align:center;color:var(--muted);padding:30px;font-style:normal;}
+
+  /* ---- Quota panel ---- */
+  .quota-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:end;}
+  @media (max-width:720px){ .quota-grid{grid-template-columns:1fr;} }
+  .remaining{font-family:"IBM Plex Mono",monospace;font-size:28px;font-weight:500;}
+  .remaining.neg{color:var(--danger);}
+  .remaining.pos{color:var(--ok);}
+
+  footer{margin-top:40px;font-size:12.5px;color:var(--muted);text-align:center;}
+  .toast{
+    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+    background:var(--steel-dark);color:#fff;padding:10px 20px;font-size:13.5px;
+    opacity:0;pointer-events:none;transition:opacity .25s;
+  }
+  .toast.show{opacity:1;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <div>
+      <h1>加工一股餘料統計</h1>
+      <div class="sub">交單餘料 · 廢棄重量累計紀錄</div>
+    </div>
+    <div class="today" id="todayLabel"></div>
+  </div>
+</header>
+<div id="storageWarning" style="display:none;background:#eee7d6;color:#5c4a1f;border-bottom:1px solid #d9c98f;padding:10px 20px;font-size:13.5px;text-align:center;">
+  ℹ️ 目前偵測不到 Claude 雲端儲存，資料改為儲存在<strong>這台裝置的這個瀏覽器</strong>裡：換瀏覽器、換裝置，或清除瀏覽器資料都不會看到目前的紀錄。若要跨裝置同步，請改在 Claude 對話中開啟本工具。
+</div>
+
+<div class="wrap">
+
+  <div class="stats" id="statsStrip">
+    <div class="stat">
+      <div class="label">累計筆數</div>
+      <div class="value" id="statCount">0</div>
+    </div>
+    <div class="stat warn">
+      <div class="label">累計廢棄 (KG)</div>
+      <div class="value" id="statWaste">0</div>
+    </div>
+    <div class="stat">
+      <div class="label">本月新增筆數</div>
+      <div class="value" id="statMonth">0</div>
+    </div>
+    <div class="stat">
+      <div class="label">客戶數</div>
+      <div class="value" id="statCustomers">0</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>新增 / 編輯紀錄 <span class="editing-flag" id="editingFlag">— 編輯中</span></h2>
+    <div class="panel">
+      <div class="grid">
+        <div class="field">
+          <label for="f_date">日期</label>
+          <input type="date" id="f_date">
+        </div>
+        <div class="field">
+          <label for="f_customer">客戶</label>
+          <input type="text" id="f_customer" list="dl_customer" placeholder="例：工信">
+          <datalist id="dl_customer"></datalist>
+        </div>
+        <div class="field">
+          <label for="f_order">交單號碼</label>
+          <input type="text" id="f_order" placeholder="例：A11647">
+        </div>
+        <div class="field">
+          <label for="f_steel">鋼種</label>
+          <input type="text" id="f_steel" list="dl_steel" placeholder="例：SD420W">
+          <datalist id="dl_steel"></datalist>
+        </div>
+        <div class="field">
+          <label for="f_dia">徑度</label>
+          <input type="text" id="f_dia" list="dl_dia" placeholder="例：D29">
+          <datalist id="dl_dia"></datalist>
+        </div>
+        <div class="field">
+          <label for="f_len">需求長度 (M)</label>
+          <input type="text" id="f_len" placeholder="例：11 或 油汙鋼筋">
+        </div>
+        <div class="field">
+          <label for="f_qty">需求支數</label>
+          <input type="number" id="f_qty" step="1" min="0">
+        </div>
+        <div class="field">
+          <label for="f_loss">LOSS (M)</label>
+          <input type="number" id="f_loss" step="0.01" min="0">
+        </div>
+        <div class="field">
+          <label for="f_waste">廢棄 (KG)</label>
+          <input type="number" id="f_waste" step="0.1" min="0">
+        </div>
+        <div class="field full">
+          <label for="f_note">備註</label>
+          <input type="text" id="f_note" placeholder="例：使用12M">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button id="btnSubmit">新增紀錄</button>
+        <button class="secondary" id="btnCancel" style="display:none;">取消編輯</button>
+      </div>
+
+      <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--line);">
+        <div class="label" style="font-size:12.5px;color:var(--muted);margin-bottom:8px;">
+          上傳檔案比對匯入（.xlsx / .csv）— 會與目前清單逐筆比對，完全相同的資料自動略過，不同的資料會新增並留下紀錄
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <input type="file" id="fileImportInput" accept=".xlsx,.xls,.csv">
+          <button class="secondary" id="btnFileImport">比對並匯入</button>
+        </div>
+        <div id="fileImportResult" style="margin-top:10px;font-size:13px;color:var(--muted);"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>
+      <span>雲端同步（GitHub） <span class="hint" id="cloudSyncHint">尚未設定</span></span>
+      <button class="section-toggle" data-target="cloudSyncBody">隱藏</button>
+    </h2>
+    <div class="section-body" id="cloudSyncBody">
+      <div class="panel">
+        <div class="grid">
+          <div class="field">
+            <label for="gh_owner">GitHub 帳號</label>
+            <input type="text" id="gh_owner" placeholder="例：PK07890">
+          </div>
+          <div class="field">
+            <label for="gh_repo">Repo 名稱</label>
+            <input type="text" id="gh_repo" placeholder="例：loss">
+          </div>
+          <div class="field">
+            <label for="gh_path">資料檔路徑</label>
+            <input type="text" id="gh_path" placeholder="例：data/scrap-data.json">
+          </div>
+          <div class="field">
+            <label for="gh_token">Personal Access Token <span class="hint">（只存在這台裝置，不會上傳）</span></label>
+            <input type="password" id="gh_token" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button id="btnSaveCloudConfig">儲存設定並連線</button>
+          <button class="secondary" id="btnClearCloudConfig">清除設定（改用本機儲存）</button>
+        </div>
+        <div id="cloudSyncStatus" style="margin-top:10px;font-size:13px;color:var(--muted);"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>
+      <span>額度追蹤 <span class="hint">剩餘 = 累計廢棄重量 − 已丟棄數量總和</span></span>
+      <button class="section-toggle" data-target="quotaBody">隱藏</button>
+    </h2>
+    <div class="section-body" id="quotaBody">
+    <div class="panel">
+      <div class="quota-grid">
+        <div class="field">
+          <label for="q_target">可還廢鋼量(KG) <span class="hint">= 累計廢棄重量，自動帶入</span></label>
+          <input type="number" id="q_target" step="1" min="0" readonly style="background:#f1efe6;color:var(--muted);">
+        </div>
+        <div class="field">
+          <div class="label" style="font-size:12.5px;color:var(--muted);margin-bottom:4px;">剩餘</div>
+          <div class="remaining" id="quotaRemaining">—</div>
+        </div>
+      </div>
+
+      <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--line);">
+        <div class="grid" style="grid-template-columns:1fr 1fr auto;align-items:end;">
+          <div class="field">
+            <label for="ql_date">日期</label>
+            <input type="date" id="ql_date">
+          </div>
+          <div class="field">
+            <label for="ql_amount">已丟棄數量 (KG，本次丟棄的量)</label>
+            <input type="number" id="ql_amount" step="1" min="0" placeholder="例：10080">
+          </div>
+          <div class="field">
+            <button id="btnAddQuotaLog">新增紀錄</button>
+          </div>
+        </div>
+
+        <div class="table-scroll" style="margin-top:14px;">
+          <table>
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th class="num">已丟棄數量 (KG)</th>
+                <th class="num">剩餘 (KG)</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="quotaLogBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>
+      <span>紀錄清單</span>
+      <button class="section-toggle" data-target="listBody">隱藏</button>
+    </h2>
+    <div class="section-body" id="listBody">
+    <div class="filters">
+      <div class="field grow">
+        <label for="ft_search">搜尋（客戶 / 交單號碼 / 備註）</label>
+        <input type="text" id="ft_search" placeholder="輸入關鍵字…">
+      </div>
+      <div class="field">
+        <label for="ft_customer">客戶</label>
+        <select id="ft_customer"><option value="">全部</option></select>
+      </div>
+      <div class="field">
+        <label for="ft_steel">鋼種</label>
+        <select id="ft_steel"><option value="">全部</option></select>
+      </div>
+      <div>
+        <button class="secondary" id="btnExport">匯出 CSV</button>
+      </div>
+    </div>
+    <div id="importBar" style="margin-bottom:14px;">
+      <button class="secondary" id="btnImportSeed">還原「115年8月_9月餘料」範本的 22 筆原始紀錄</button>
+      <span class="hint" style="margin-left:8px;">若不小心刪除或想重新比對，可用此按鈕還原成上傳檔案中的原始資料</span>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>日期</th>
+            <th>客戶</th>
+            <th>交單號碼</th>
+            <th>鋼種</th>
+            <th>徑度</th>
+            <th class="num">需求長度(M)</th>
+            <th class="num">需求支數</th>
+            <th class="num">LOSS(M)</th>
+            <th class="num">廢棄(KG)</th>
+            <th>備註</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </section>
+
+  <footer>資料儲存在此裝置的 Claude 帳號中，重新開啟本工具會自動載入先前累計的紀錄。</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REC_KEY = "scrap:records";
+const SETTINGS_KEY = "scrap:settings";
+const QUOTA_LOG_KEY = "scrap:quotaLog";
+const UI_STATE_KEY = "scrap:uiState";
+
+let records = [];
+let settings = {};
+let quotaLog = [];
+let uiState = { quotaOpen: true, listOpen: true };
+let editingId = null;
+
+// ---- storage abstraction: use Claude's cloud storage when available,
+// otherwise fall back to this browser's localStorage so the tool still
+// works when the file has been downloaded and opened directly ----
+const hasCloudStorage = (typeof window.storage !== "undefined") && !!window.storage;
+const LS_PREFIX = "jga1-scrap:";
+
+async function storageGet(key){
+  if(hasCloudStorage){
+    return await window.storage.get(key, false);
+  }
+  const raw = localStorage.getItem(LS_PREFIX + key);
+  return raw === null ? null : { key, value: raw, shared:false };
+}
+
+async function storageSet(key, value){
+  if(hasCloudStorage){
+    return await window.storage.set(key, value, false);
+  }
+  localStorage.setItem(LS_PREFIX + key, value);
+  return { key, value, shared:false };
+}
+
+// ---- GitHub-as-database: optional shared cloud sync that overrides the
+// per-browser storage above when configured. Config (owner/repo/path/token)
+// lives only in this device's localStorage - never committed anywhere. ----
+const GH_CFG_KEY = "jga1-scrap:gh-cloud-config";
+let cloudSha = null; // last known sha of the remote data file, for conflict-safe writes
+
+function getCloudConfig(){
+  try{
+    const raw = localStorage.getItem(GH_CFG_KEY);
+    return raw ? JSON.parse(raw) : { owner:"PK07890", repo:"loss", path:"data/scrap-data.json", token:"" };
+  }catch(e){
+    return { owner:"PK07890", repo:"loss", path:"data/scrap-data.json", token:"" };
+  }
+}
+
+function setCloudConfig(cfg){
+  localStorage.setItem(GH_CFG_KEY, JSON.stringify(cfg));
+}
+
+function cloudConfigured(){
+  const c = getCloudConfig();
+  return !!(c.owner && c.repo && c.path);
+}
+
+function cloudCanWrite(){
+  const c = getCloudConfig();
+  return !!(c.owner && c.repo && c.path && c.token);
+}
+
+function utf8ToBase64(str){
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+function base64ToUtf8(b64){
+  return decodeURIComponent(escape(atob(b64.replace(/\n/g,""))));
+}
+
+function githubApiUrl(c){
+  return `https://api.github.com/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/contents/${c.path.split("/").map(encodeURIComponent).join("/")}`;
+}
+
+async function githubFetchFile(){
+  const c = getCloudConfig();
+  const headers = { "Accept":"application/vnd.github+json" };
+  if(c.token) headers["Authorization"] = `Bearer ${c.token}`;
+  const res = await fetch(githubApiUrl(c), { headers, cache:"no-store" });
+  if(res.status === 404) return { exists:false, sha:null, data:null };
+  if(!res.ok) throw new Error(`GitHub 讀取失敗（${res.status}）`);
+  const json = await res.json();
+  const content = base64ToUtf8(json.content);
+  return { exists:true, sha: json.sha, data: JSON.parse(content) };
+}
+
+async function githubPutFile(dataObj, sha){
+  const c = getCloudConfig();
+  if(!c.token) throw new Error("尚未輸入 Personal Access Token，無法寫入");
+  const body = {
+    message: `更新餘料統計資料 (${new Date().toISOString()})`,
+    content: utf8ToBase64(JSON.stringify(dataObj, null, 2))
+  };
+  if(sha) body.sha = sha;
+  const res = await fetch(githubApiUrl(c), {
+    method: "PUT",
+    headers: {
+      "Accept":"application/vnd.github+json",
+      "Authorization": `Bearer ${c.token}`,
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  if(!res.ok){
+    const errBody = await res.text().catch(()=> "");
+    const err = new Error(`GitHub 寫入失敗（${res.status}）`);
+    err.status = res.status;
+    err.body = errBody;
+    throw err;
+  }
+  return await res.json();
+}
+
+async function loadCloudState(){
+  const found = await githubFetchFile();
+  cloudSha = found.exists ? found.sha : null;
+  if(found.exists && found.data){
+    records = found.data.records || [];
+    quotaLog = found.data.quotaLog || [];
+    settings = found.data.settings || {};
+  }
+  return found.exists;
+}
+
+async function saveCloudState(){
+  if(!cloudCanWrite()) return false;
+  const payload = { records, quotaLog, settings, savedAt: new Date().toISOString() };
+  try{
+    // re-check the latest sha right before writing to avoid clobbering someone else's save
+    const latest = await githubFetchFile();
+    const result = await githubPutFile(payload, latest.exists ? latest.sha : null);
+    cloudSha = result.content.sha;
+    return true;
+  }catch(e){
+    console.error("Cloud save error:", e);
+    if(e.status === 409){
+      showToast("偵測到別人剛剛也存過檔，請重新整理頁面後再試一次");
+    }else{
+      showToast("雲端存檔失敗：" + e.message);
+    }
+    return false;
+  }
+}
+
+function updateCloudSyncUI(){
+  const hint = $("cloudSyncHint");
+  const status = $("cloudSyncStatus");
+  const c = getCloudConfig();
+  if(!cloudConfigured()){
+    hint.textContent = "尚未設定";
+    status.textContent = "填寫 GitHub 帳號、Repo 名稱與資料檔路徑後即可讀取／同步資料。";
+    return;
+  }
+  if(cloudCanWrite()){
+    hint.textContent = `已連線 · ${c.owner}/${c.repo}（可讀寫）`;
+    status.textContent = "新增、編輯、刪除、匯入的每個動作，都會直接寫回這個 GitHub repo。";
+  }else{
+    hint.textContent = `已連線 · ${c.owner}/${c.repo}（唯讀）`;
+    status.textContent = "目前只填了帳號／Repo／路徑，沒有 Token，只能讀取，無法儲存。請輸入 Token 以啟用寫入。";
+  }
+}
+
+
+const $ = (id) => document.getElementById(id);
+
+function todayISO(){
+  const d = new Date();
+  return d.toISOString().slice(0,10);
+}
+
+function fmtNum(n){
+  if(n === null || n === undefined || isNaN(n)) return "0";
+  return Number(n).toLocaleString("zh-TW", {maximumFractionDigits:2});
+}
+
+function showToast(msg){
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 1800);
+}
+
+async function loadAll(){
+  // always load local-only UI prefs first (section collapse state never syncs to GitHub)
+  try{
+    const u = await storageGet(UI_STATE_KEY);
+    uiState = u ? JSON.parse(u.value) : { quotaOpen:true, listOpen:true, cloudSyncOpen:true };
+  }catch(e){
+    uiState = { quotaOpen:true, listOpen:true, cloudSyncOpen:true };
+  }
+  applySectionState("quotaBody", uiState.quotaOpen);
+  applySectionState("listBody", uiState.listOpen);
+  applySectionState("cloudSyncBody", uiState.cloudSyncOpen !== false);
+
+  // populate the cloud-sync settings fields from this device's saved config
+  const cfg = getCloudConfig();
+  $("gh_owner").value = cfg.owner || "";
+  $("gh_repo").value = cfg.repo || "";
+  $("gh_path").value = cfg.path || "";
+  $("gh_token").value = cfg.token || "";
+  updateCloudSyncUI();
+
+  if(cloudConfigured()){
+    document.getElementById("storageWarning").style.display = "none";
+    try{
+      const found = await loadCloudState();
+      if(!found){
+        // first time using this data file: seed it (if we can write) or show empty state
+        records = []; quotaLog = []; settings = {};
+        if(cloudCanWrite()){
+          await importSeed(true);
+        }else{
+          renderAll();
+        }
+      }else{
+        renderAll();
+      }
+      return;
+    }catch(e){
+      console.error("Cloud load error:", e);
+      showToast("讀取雲端資料失敗，暫時顯示本機備份資料");
+      $("cloudSyncStatus").textContent = "讀取失敗：" + e.message + "（請確認帳號、Repo、路徑是否正確，以及網路連線）";
+      // fall through to local fallback below so the tool still shows something
+    }
+  }
+
+  if(!hasCloudStorage){
+    document.getElementById("storageWarning").style.display = "block";
+  }
+  try{
+    const r = await storageGet(REC_KEY);
+    records = r ? JSON.parse(r.value) : [];
+  }catch(e){
+    records = [];
+  }
+  try{
+    const s = await storageGet(SETTINGS_KEY);
+    settings = s ? JSON.parse(s.value) : {};
+  }catch(e){
+    settings = {};
+  }
+  try{
+    const q = await storageGet(QUOTA_LOG_KEY);
+    quotaLog = q ? JSON.parse(q.value) : [];
+  }catch(e){
+    quotaLog = [];
+  }
+
+  if(records.length === 0){
+    await importSeed(true);
+    return;
+  }
+  renderAll();
+}
+
+async function persistAll(){
+  if(cloudCanWrite()){
+    return await saveCloudState();
+  }
+  // local fallback (Claude cloud storage for this account, or this browser's localStorage)
+  try{
+    const r1 = await storageSet(REC_KEY, JSON.stringify(records));
+    const r2 = await storageSet(SETTINGS_KEY, JSON.stringify(settings));
+    const r3 = await storageSet(QUOTA_LOG_KEY, JSON.stringify(quotaLog));
+    if(!r1 || !r2 || !r3){
+      console.error("Local storage set failed");
+      showToast("儲存失敗，請重試");
+      return false;
+    }
+    return true;
+  }catch(e){
+    console.error("Storage error:", e);
+    showToast("儲存失敗，請重試");
+    return false;
+  }
+}
+
+async function saveRecords(){ return persistAll(); }
+async function saveSettings(){ return persistAll(); }
+async function saveQuotaLog(){ return persistAll(); }
+
+async function saveUiState(){
+  try{
+    await storageSet(UI_STATE_KEY, JSON.stringify(uiState));
+  }catch(e){
+    console.error("Storage error (ui state):", e);
+  }
+}
+
+function applySectionState(targetId, isOpen){
+  const body = document.getElementById(targetId);
+  const btn = document.querySelector(`.section-toggle[data-target="${targetId}"]`);
+  if(!body || !btn) return;
+  body.classList.toggle("collapsed", !isOpen);
+  btn.textContent = isOpen ? "隱藏" : "顯示";
+}
+
+async function toggleSection(targetId, stateKey){
+  uiState[stateKey] = !uiState[stateKey];
+  applySectionState(targetId, uiState[stateKey]);
+  await saveUiState();
+}
+
+function uid(){
+  return Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+}
+
+function collectForm(){
+  return {
+    date: $("f_date").value || todayISO(),
+    customer: $("f_customer").value.trim(),
+    order: $("f_order").value.trim(),
+    steel: $("f_steel").value.trim(),
+    dia: $("f_dia").value.trim(),
+    len: $("f_len").value.trim(),
+    qty: $("f_qty").value === "" ? null : Number($("f_qty").value),
+    loss: $("f_loss").value === "" ? null : Number($("f_loss").value),
+    waste: $("f_waste").value === "" ? null : Number($("f_waste").value),
+    note: $("f_note").value.trim()
+  };
+}
+
+function clearForm(){
+  ["f_customer","f_order","f_steel","f_dia","f_len","f_qty","f_loss","f_waste","f_note"].forEach(id=>$(id).value="");
+  $("f_date").value = todayISO();
+}
+
+function startEdit(id){
+  const rec = records.find(r=>r.id===id);
+  if(!rec) return;
+  editingId = id;
+  $("f_date").value = rec.date;
+  $("f_customer").value = rec.customer;
+  $("f_order").value = rec.order;
+  $("f_steel").value = rec.steel;
+  $("f_dia").value = rec.dia;
+  $("f_len").value = rec.len;
+  $("f_qty").value = rec.qty ?? "";
+  $("f_loss").value = rec.loss ?? "";
+  $("f_waste").value = rec.waste ?? "";
+  $("f_note").value = rec.note;
+  $("btnSubmit").textContent = "更新紀錄";
+  $("btnCancel").style.display = "inline-block";
+  $("editingFlag").style.display = "inline";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function cancelEdit(){
+  editingId = null;
+  clearForm();
+  $("btnSubmit").textContent = "新增紀錄";
+  $("btnCancel").style.display = "none";
+  $("editingFlag").style.display = "none";
+}
+
+async function handleSubmit(){
+  const data = collectForm();
+  if(!data.customer && !data.order && !data.waste){
+    showToast("請至少輸入客戶、交單號碼或廢棄重量");
+    return;
+  }
+  if(editingId){
+    const idx = records.findIndex(r=>r.id===editingId);
+    if(idx>-1) records[idx] = {...records[idx], ...data};
+    showToast("已更新紀錄並自動儲存");
+  }else{
+    records.push({id:uid(), ...data});
+    showToast("已新增紀錄並自動儲存");
+  }
+  await saveRecords();
+  cancelEdit();
+  renderAll();
+}
+
+async function deleteRecord(id){
+  if(!confirm("確定要刪除這筆紀錄嗎？")) return;
+  records = records.filter(r=>r.id!==id);
+  await saveRecords();
+  renderAll();
+}
+
+function uniqueSorted(arr){
+  return [...new Set(arr.filter(Boolean))].sort((a,b)=>a.localeCompare(b,"zh-Hant"));
+}
+
+function populateDatalistsAndFilters(){
+  const customers = uniqueSorted(records.map(r=>r.customer));
+  const steels = uniqueSorted(records.map(r=>r.steel));
+  const dias = uniqueSorted(records.map(r=>r.dia));
+
+  $("dl_customer").innerHTML = customers.map(c=>`<option value="${c}">`).join("");
+  $("dl_steel").innerHTML = steels.map(c=>`<option value="${c}">`).join("");
+  $("dl_dia").innerHTML = dias.map(c=>`<option value="${c}">`).join("");
+
+  const curCust = $("ft_customer").value;
+  const curSteel = $("ft_steel").value;
+  $("ft_customer").innerHTML = `<option value="">全部</option>` + customers.map(c=>`<option value="${c}">${c}</option>`).join("");
+  $("ft_steel").innerHTML = `<option value="">全部</option>` + steels.map(c=>`<option value="${c}">${c}</option>`).join("");
+  $("ft_customer").value = customers.includes(curCust) ? curCust : "";
+  $("ft_steel").value = steels.includes(curSteel) ? curSteel : "";
+}
+
+function filteredRecords(){
+  const q = $("ft_search").value.trim().toLowerCase();
+  const cust = $("ft_customer").value;
+  const steel = $("ft_steel").value;
+  return records
+    .filter(r => !cust || r.customer === cust)
+    .filter(r => !steel || r.steel === steel)
+    .filter(r => {
+      if(!q) return true;
+      return [r.customer, r.order, r.note].join(" ").toLowerCase().includes(q);
+    })
+    .sort((a,b) => (b.date||"").localeCompare(a.date||""));
+}
+
+function renderTable(){
+  const rows = filteredRecords();
+  const tbody = $("tbody");
+  if(rows.length===0){
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="11">尚無紀錄，請於上方新增第一筆餘料資料</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows.map(r => `
+    <tr>
+      <td>${r.date||""}</td>
+      <td>${r.customer||""}</td>
+      <td>${r.order||""}</td>
+      <td>${r.steel||""}</td>
+      <td>${r.dia||""}</td>
+      <td class="num">${r.len||""}</td>
+      <td class="num">${r.qty ?? ""}</td>
+      <td class="num">${r.loss ?? ""}</td>
+      <td class="num">${fmtNum(r.waste)}</td>
+      <td class="note">${r.note||""}</td>
+      <td>
+        <button class="link" onclick="startEdit('${r.id}')">編輯</button>
+        <button class="danger-text" onclick="deleteRecord('${r.id}')">刪除</button>
+      </td>
+    </tr>
+  `).join("");
+}
+
+function renderStats(){
+  const totalWaste = records.reduce((s,r)=>s+(Number(r.waste)||0),0);
+  const customers = new Set(records.map(r=>r.customer).filter(Boolean));
+  const ym = todayISO().slice(0,7);
+  const monthCount = records.filter(r => (r.date||"").slice(0,7) === ym).length;
+
+  $("statCount").textContent = records.length;
+  $("statWaste").textContent = fmtNum(totalWaste);
+  $("statMonth").textContent = monthCount;
+  $("statCustomers").textContent = customers.size;
+}
+
+function sortedQuotaLog(){
+  return [...quotaLog].sort((a,b)=> (a.date||"").localeCompare(b.date||"") || a.id.localeCompare(b.id));
+}
+
+function latestQuotaAmount(){
+  const sorted = sortedQuotaLog();
+  if(sorted.length === 0) return null;
+  return sorted[sorted.length-1].amount;
+}
+
+function totalQuotaDiscarded(){
+  return quotaLog.reduce((s,e)=>s+(Number(e.amount)||0),0);
+}
+
+function cumulativeWasteTotal(){
+  return records.reduce((s,r)=>s+(Number(r.waste)||0),0);
+}
+
+function renderQuota(){
+  const cumulativeWaste = cumulativeWasteTotal();
+  $("q_target").value = cumulativeWaste;
+
+  // history table: running cumulative discarded amount up to and including each entry
+  const sorted = sortedQuotaLog();
+  const body = $("quotaLogBody");
+  if(sorted.length === 0){
+    body.innerHTML = `<tr class="empty-row"><td colspan="4">尚未輸入丟棄數量，請於上方新增</td></tr>`;
+  }else{
+    let running = 0;
+    body.innerHTML = sorted.map(entry => {
+      running += Number(entry.amount||0);
+      const remain = cumulativeWaste - running;
+      const remainCell = `<span class="${remain<0?'neg':'pos'}" style="font-family:'IBM Plex Mono',monospace;">${fmtNum(remain)}</span>`;
+      return `
+        <tr>
+          <td>${entry.date||""}</td>
+          <td class="num">${fmtNum(entry.amount)}</td>
+          <td class="num">${remainCell}</td>
+          <td><button class="danger-text" onclick="deleteQuotaLog('${entry.id}')">刪除</button></td>
+        </tr>`;
+    }).join("");
+  }
+
+  // headline remaining = 累計廢棄的重量 - 已丟棄重量的總和
+  const el = $("quotaRemaining");
+  const totalDiscarded = totalQuotaDiscarded();
+  const remaining = cumulativeWaste - totalDiscarded;
+  el.textContent = fmtNum(remaining) + " KG";
+  el.className = "remaining " + (remaining < 0 ? "neg" : "pos");
+}
+
+async function addQuotaLog(){
+  const date = $("ql_date").value;
+  const amount = $("ql_amount").value;
+  if(!date || amount === ""){
+    showToast("請輸入日期與已丟棄數量");
+    return;
+  }
+  quotaLog.push({id:uid(), date, amount:Number(amount)});
+  await saveQuotaLog();
+  $("ql_date").value = "";
+  $("ql_amount").value = "";
+  renderQuota();
+  showToast("已新增丟棄數量紀錄並自動儲存");
+}
+
+async function deleteQuotaLog(id){
+  if(!confirm("確定要刪除這筆丟棄數量紀錄嗎？")) return;
+  quotaLog = quotaLog.filter(e=>e.id!==id);
+  await saveQuotaLog();
+  renderQuota();
+}
+
+function renderAll(){
+  populateDatalistsAndFilters();
+  renderTable();
+  renderStats();
+  renderQuota();
+  maybeShowImportBar();
+}
+
+function exportCSV(){
+  const rows = filteredRecords();
+  const header = ["日期","客戶","交單號碼","鋼種","徑度","需求長度(M)","需求支數","LOSS(M)","廢棄(KG)","備註"];
+  const lines = [header.join(",")];
+  rows.forEach(r=>{
+    const line = [r.date,r.customer,r.order,r.steel,r.dia,r.len,r.qty,r.loss,r.waste,r.note]
+      .map(v => `"${(v??"").toString().replace(/"/g,'""')}"`)
+      .join(",");
+    lines.push(line);
+  });
+  const blob = new Blob(["\uFEFF"+lines.join("\n")], {type:"text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `餘料統計_${todayISO()}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// seed data from the original 115年8月_9月餘料 template
+const SEED_RECORDS = [
+  {date:"",customer:"工信",order:"A11647",steel:"SD420W",dia:"D29",len:"11",qty:725,loss:1,waste:3683,note:"使用12M"},
+  {date:"",customer:"工信",order:"A11647",steel:"SD420W",dia:"D32",len:"9.7",qty:920,loss:0.2,waste:1175,note:"使用15M(9.7+5.1)"},
+  {date:"",customer:"工信",order:"P95617",steel:"SD420W",dia:"D29",len:"11.3",qty:137,loss:0.2,waste:139,note:"使用16M(11.3+4.5)"},
+  {date:"",customer:"工信",order:"P95617",steel:"SD420W",dia:"D29",len:"10.6",qty:77,loss:0.9,waste:352,note:"使用16M(10.6+4.5)"},
+  {date:"",customer:"皇昌",order:"A11666",steel:"SD420W",dia:"D29",len:"12.6",qty:868,loss:0.4,waste:1764,note:"使用13M"},
+  {date:"",customer:"皇昌",order:"A11667",steel:"SD420W",dia:"D29",len:"14.6",qty:312,loss:1.4,waste:2219,note:"使用16M"},
+  {date:"",customer:"皇昌",order:"P97395",steel:"SD420W",dia:"D29",len:"8.3",qty:622,loss:1.4,waste:2212,note:"使用18M(8.3*2)"},
+  {date:"",customer:"皇昌",order:"A11670",steel:"SD420W",dia:"D29",len:"13.6",qty:526,loss:0.4,waste:1069,note:"使用14M"},
+  {date:"",customer:"",order:"",steel:"SD420W",dia:"D13",len:"油汙鋼筋",qty:null,loss:null,waste:1500,note:""},
+  {date:"",customer:"皇昌",order:"P10015",steel:"SD420W",dia:"D29",len:"13.6",qty:262,loss:0.4,waste:532,note:"使用14M"},
+  {date:"",customer:"皇昌",order:"P10015",steel:"SD420W",dia:"D29",len:"11.6",qty:150,loss:0.4,waste:305,note:"使用12M"},
+  {date:"",customer:"皇昌",order:"P10015",steel:"SD420W",dia:"D29",len:"6.7",qty:206,loss:0.6,waste:314,note:"使用14M(6.7*2)"},
+  {date:"",customer:"皇昌",order:"A11690",steel:"SD420W",dia:"D29",len:"10.6",qty:928,loss:1.4,waste:6600,note:"使用12M"},
+  {date:"",customer:"皇昌",order:"A11689",steel:"SD420W",dia:"D29",len:"10.6",qty:696,loss:1.4,waste:4950,note:"使用12M"},
+  {date:"",customer:"皇昌",order:"A11688",steel:"SD420W",dia:"D29",len:"16",qty:22,loss:2,waste:223,note:"使用18M"},
+  {date:"",customer:"皇昌",order:"A11688",steel:"SD420W",dia:"D29",len:"12.6",qty:582,loss:1.4,waste:4140,note:"使用14M"},
+  {date:"",customer:"桃園加工",order:"U91217",steel:"SD490W",dia:"D25",len:"",qty:null,loss:null,waste:525,note:"使用SD550W代(阿源告知)"},
+  {date:"",customer:"桃園加工",order:"U91225",steel:"SD490W",dia:"D25",len:"",qty:null,loss:null,waste:482,note:"使用SD550W代(阿源告知)"},
+  {date:"",customer:"桃園加工",order:"U91233",steel:"SD490W",dia:"D25",len:"",qty:null,loss:null,waste:518,note:"使用SD550W代(阿源告知)"},
+  {date:"",customer:"桃園加工",order:"U01231",steel:"SD550W",dia:"D32",len:"6.9",qty:179,loss:0.5,waste:286,note:"使用18M(6.9*2+3.7)"},
+  {date:"",customer:"桃園加工",order:"U01239",steel:"SD550W",dia:"D32",len:"6.9",qty:208,loss:0.5,waste:333,note:"使用18M(6.9*2+3.7)"},
+  {date:"",customer:"協泰營造",order:"U92511",steel:"SD280W",dia:"D13",len:"6.5",qty:440,loss:2,waste:875,note:"使用箍筋8.5M(6.5M綁2M)"}
+];
+
+function maybeShowImportBar(){
+  // always available as a "restore original data" action
+}
+
+async function importSeed(silent){
+  records = SEED_RECORDS.map(r => ({id:uid(), ...r}));
+  quotaLog = [
+    {id:uid(), date:"2026-08-23", amount:10080},
+    {id:uid(), date:"2026-09-09", amount:28780}
+  ];
+  await persistAll();
+  renderAll();
+  if(!silent) showToast("已還原 22 筆原始紀錄");
+}
+
+// ---- file upload compare & import ----
+
+const HEADER_ALIASES = {
+  date:     ["日期"],
+  customer: ["客戶"],
+  order:    ["交單號碼","交單编号","單號","交易單號"],
+  steel:    ["鋼種"],
+  dia:      ["徑度"],
+  len:      ["需求長度(M)","需求長度","長度(M)","長度"],
+  qty:      ["需求支數","支數"],
+  loss:     ["LOSS(M)","LOSS","loss(m)","loss"],
+  waste:    ["廢棄(KG)","廢棄","廢棄重量","廢棄(kg)"],
+  note:     ["備註"]
+};
+
+function excelDateToISO(v){
+  // SheetJS with cellDates:true already gives JS Date objects for real date cells
+  if(v instanceof Date && !isNaN(v)){
+    return v.toISOString().slice(0,10);
+  }
+  const s = (v ?? "").toString().trim();
+  // already looks like an ISO-ish date
+  if(/^\d{4}[-/]\d{1,2}[-/]\d{1,2}/.test(s)){
+    return s.slice(0,10).replace(/\//g,"-");
+  }
+  return "";
+}
+
+function toNumOrNull(v){
+  if(v === null || v === undefined || v === "") return null;
+  const n = Number(v);
+  return isNaN(n) ? null : n;
+}
+
+function recordSignature(r){
+  return JSON.stringify({
+    date: r.date || "",
+    customer: (r.customer||"").toString().trim(),
+    order: (r.order||"").toString().trim(),
+    steel: (r.steel||"").toString().trim(),
+    dia: (r.dia||"").toString().trim(),
+    len: (r.len??"").toString().trim(),
+    qty: toNumOrNull(r.qty),
+    loss: toNumOrNull(r.loss),
+    waste: toNumOrNull(r.waste),
+    note: (r.note||"").toString().trim()
+  });
+}
+
+function parseSheetRows(rows){
+  if(!rows || rows.length === 0) return [];
+  const headerRow = rows[0].map(h => (h??"").toString().trim());
+  const colIndex = {};
+  Object.keys(HEADER_ALIASES).forEach(field=>{
+    const aliases = HEADER_ALIASES[field];
+    const idx = headerRow.findIndex(h => aliases.some(a => h === a || h.replace(/\s/g,"") === a.replace(/\s/g,"")));
+    colIndex[field] = idx;
+  });
+
+  const parsed = [];
+  for(let i=1;i<rows.length;i++){
+    const row = rows[i];
+    if(!row || row.every(c => c===undefined || c===null || c.toString().trim()==="")) continue;
+
+    const get = (field) => colIndex[field] >= 0 ? row[colIndex[field]] : "";
+    const rec = {
+      date: excelDateToISO(get("date")),
+      customer: (get("customer")??"").toString().trim(),
+      order: (get("order")??"").toString().trim(),
+      steel: (get("steel")??"").toString().trim(),
+      dia: (get("dia")??"").toString().trim(),
+      len: (get("len")??"").toString().trim(),
+      qty: toNumOrNull(get("qty")),
+      loss: toNumOrNull(get("loss")),
+      waste: toNumOrNull(get("waste")),
+      note: (get("note")??"").toString().trim()
+    };
+    // skip rows that carry no meaningful identifying content (ignores pure summary/total rows)
+    const hasContent = rec.customer || rec.order || rec.steel || rec.dia || rec.len || rec.note;
+    if(hasContent) parsed.push(rec);
+  }
+  return parsed;
+}
+
+async function handleFileImport(){
+  const input = $("fileImportInput");
+  const resultEl = $("fileImportResult");
+  const file = input.files && input.files[0];
+  if(!file){
+    showToast("請先選擇檔案");
+    return;
+  }
+  if(typeof XLSX === "undefined"){
+    resultEl.textContent = "檔案解析元件載入失敗，請重新整理頁面後再試一次。";
+    return;
+  }
+
+  resultEl.textContent = "讀取中…";
+  try{
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf, {type:"array", cellDates:true});
+    const firstSheetName = wb.SheetNames[0];
+    const ws = wb.Sheets[firstSheetName];
+    const rows = XLSX.utils.sheet_to_json(ws, {header:1, raw:true, defval:""});
+    const parsedRecords = parseSheetRows(rows);
+
+    if(parsedRecords.length === 0){
+      resultEl.textContent = "找不到可辨識的資料列，請確認檔案欄位名稱與範本一致（客戶、交單號碼、鋼種、徑度…）。";
+      return;
+    }
+
+    const existingSignatures = new Set(records.map(recordSignature));
+    let addedCount = 0, skippedCount = 0;
+    parsedRecords.forEach(rec=>{
+      const sig = recordSignature(rec);
+      if(existingSignatures.has(sig)){
+        skippedCount++;
+      }else{
+        records.push({id:uid(), ...rec});
+        existingSignatures.add(sig);
+        addedCount++;
+      }
+    });
+
+    await saveRecords();
+    renderAll();
+    resultEl.textContent = `檔案共 ${parsedRecords.length} 筆：新增 ${addedCount} 筆，${skippedCount} 筆與現有資料完全相同已略過。`;
+    showToast(`已比對完成並自動儲存，新增 ${addedCount} 筆`);
+    input.value = "";
+  }catch(e){
+    resultEl.textContent = "檔案讀取失敗，請確認檔案格式正確（.xlsx / .csv）。";
+  }
+}
+
+// events
+document.querySelectorAll(".section-toggle").forEach(btn=>{
+  const targetId = btn.dataset.target;
+  const stateKey = targetId === "quotaBody" ? "quotaOpen"
+    : targetId === "cloudSyncBody" ? "cloudSyncOpen"
+    : "listOpen";
+  btn.addEventListener("click", ()=>toggleSection(targetId, stateKey));
+});
+$("btnImportSeed").addEventListener("click", ()=>importSeed(false));
+$("btnFileImport").addEventListener("click", handleFileImport);
+$("btnAddQuotaLog").addEventListener("click", addQuotaLog);
+$("btnSubmit").addEventListener("click", handleSubmit);
+$("btnCancel").addEventListener("click", cancelEdit);
+$("btnExport").addEventListener("click", exportCSV);
+$("ft_search").addEventListener("input", renderTable);
+$("ft_customer").addEventListener("change", renderTable);
+$("ft_steel").addEventListener("change", renderTable);
+$("btnSaveCloudConfig").addEventListener("click", async ()=>{
+  const cfg = {
+    owner: $("gh_owner").value.trim(),
+    repo: $("gh_repo").value.trim(),
+    path: $("gh_path").value.trim() || "data/scrap-data.json",
+    token: $("gh_token").value.trim()
+  };
+  if(!cfg.owner || !cfg.repo){
+    showToast("請至少輸入 GitHub 帳號與 Repo 名稱");
+    return;
+  }
+  setCloudConfig(cfg);
+  $("cloudSyncStatus").textContent = "連線中…";
+  await loadAll();
+  showToast("雲端同步設定已儲存");
+});
+$("btnClearCloudConfig").addEventListener("click", async ()=>{
+  if(!confirm("確定要清除雲端同步設定嗎？之後將改用本機儲存。")) return;
+  localStorage.removeItem(GH_CFG_KEY);
+  $("gh_owner").value = ""; $("gh_repo").value = ""; $("gh_path").value = ""; $("gh_token").value = "";
+  cloudSha = null;
+  await loadAll();
+  showToast("已清除雲端同步設定");
+});
+
+window.startEdit = startEdit;
+window.deleteRecord = deleteRecord;
+window.deleteQuotaLog = deleteQuotaLog;
+
+// init
+$("f_date").value = todayISO();
+$("todayLabel").textContent = new Date().toLocaleDateString("zh-TW", {year:"numeric",month:"2-digit",day:"2-digit"});
+loadAll();
+</script>
+</body>
+</html>
