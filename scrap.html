@@ -309,7 +309,7 @@
           </div>
           <div class="field">
             <label for="gh_repo">Repo 名稱</label>
-            <input type="text" id="gh_repo" placeholder="例：loss">
+            <input type="text" id="gh_repo" placeholder="例：損失">
           </div>
           <div class="field">
             <label for="gh_path">資料檔路徑</label>
@@ -480,9 +480,9 @@ let cloudSha = null; // last known sha of the remote data file, for conflict-saf
 function getCloudConfig(){
   try{
     const raw = localStorage.getItem(GH_CFG_KEY);
-    return raw ? JSON.parse(raw) : { owner:"PK07890", repo:"loss", path:"data/scrap-data.json", token:"" };
+    return raw ? JSON.parse(raw) : { owner:"PK07890", repo:"損失", path:"data/scrap-data.json", token:"" };
   }catch(e){
-    return { owner:"PK07890", repo:"loss", path:"data/scrap-data.json", token:"" };
+    return { owner:"PK07890", repo:"損失", path:"data/scrap-data.json", token:"" };
   }
 }
 
