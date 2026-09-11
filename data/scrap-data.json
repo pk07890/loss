@@ -285,19 +285,6 @@
       "loss": 2,
       "waste": 875,
       "note": "使用箍筋8.5M(6.5M綁2M)"
-    },
-    {
-      "id": "mtwm3wyj52ibl",
-      "date": "",
-      "customer": "測試",
-      "order": "A12345",
-      "steel": "SD280W",
-      "dia": "D10",
-      "len": "5",
-      "qty": 100,
-      "loss": 2,
-      "waste": 112,
-      "note": "使用12M"
     }
   ],
   "quotaLog": [
@@ -313,5 +300,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-09-11T07:05:49.723Z"
+  "savedAt": "2026-09-11T07:43:42.708Z"
 }
