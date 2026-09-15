@@ -1,7 +1,7 @@
 {
   "records": [
     {
-      "id": "mu29fbqkk62b3",
+      "id": "mu29gmvf1hwb8",
       "date": "2026-07-24",
       "customer": "工信",
       "order": "A11647",
@@ -14,7 +14,7 @@
       "note": "使用12M"
     },
     {
-      "id": "mu29fbqkld0x2",
+      "id": "mu29gmvf8626s",
       "date": "2026-07-24",
       "customer": "工信",
       "order": "A11647",
@@ -27,7 +27,7 @@
       "note": "使用15M(9.7+5.1)"
     },
     {
-      "id": "mu29fbql7yxht",
+      "id": "mu29gmvfg1s9k",
       "date": "2026-07-22",
       "customer": "工信",
       "order": "P95617",
@@ -40,7 +40,7 @@
       "note": "使用16M(11.3+4.5)"
     },
     {
-      "id": "mu29fbqlxz6ly",
+      "id": "mu29gmvfaeq1r",
       "date": "2026-07-22",
       "customer": "工信",
       "order": "P95617",
@@ -53,7 +53,7 @@
       "note": "使用16M(10.6+4.5)"
     },
     {
-      "id": "mu29fbqlsvhhz",
+      "id": "mu29gmvfwqgv7",
       "date": "2026-08-14",
       "customer": "皇昌",
       "order": "A11666",
@@ -66,7 +66,7 @@
       "note": "使用13M"
     },
     {
-      "id": "mu29fbqlvwwi0",
+      "id": "mu29gmvfexcd9",
       "date": "2026-08-13",
       "customer": "皇昌",
       "order": "A11667",
@@ -79,7 +79,7 @@
       "note": "使用16M"
     },
     {
-      "id": "mu29fbqlbdvn3",
+      "id": "mu29gmvfgzpb2",
       "date": "2026-08-12",
       "customer": "皇昌",
       "order": "P97395",
@@ -92,7 +92,7 @@
       "note": "使用18M(8.3*2)"
     },
     {
-      "id": "mu29fbql3ywq6",
+      "id": "mu29gmvf1jl8w",
       "date": "2026-08-17",
       "customer": "皇昌",
       "order": "A11670",
@@ -105,7 +105,7 @@
       "note": "使用14M"
     },
     {
-      "id": "mu29fbqlijeb6",
+      "id": "mu29gmvfw3zcf",
       "date": "2026-08-17",
       "customer": "",
       "order": "",
@@ -118,7 +118,7 @@
       "note": ""
     },
     {
-      "id": "mu29fbqlzd4p7",
+      "id": "mu29gmvf3o87w",
       "date": "2026-08-28",
       "customer": "皇昌",
       "order": "P10015",
@@ -131,7 +131,7 @@
       "note": "使用14M"
     },
     {
-      "id": "mu29fbqldd06f",
+      "id": "mu29gmvfqgs0p",
       "date": "2026-08-28",
       "customer": "皇昌",
       "order": "P10015",
@@ -144,7 +144,7 @@
       "note": "使用12M"
     },
     {
-      "id": "mu29fbql6n7zt",
+      "id": "mu29gmvfytta0",
       "date": "2026-08-28",
       "customer": "皇昌",
       "order": "P10015",
@@ -157,7 +157,7 @@
       "note": "使用14M(6.7*2)"
     },
     {
-      "id": "mu29fbqll0cy4",
+      "id": "mu29gmvf9h837",
       "date": "2026-08-28",
       "customer": "皇昌",
       "order": "A11690",
@@ -170,7 +170,7 @@
       "note": "使用12M"
     },
     {
-      "id": "mu29fbqlmm5v5",
+      "id": "mu29gmvfd4a4i",
       "date": "2026-08-28",
       "customer": "皇昌",
       "order": "A11689",
@@ -183,7 +183,7 @@
       "note": "使用12M"
     },
     {
-      "id": "mu29fbqldbb52",
+      "id": "mu29gmvf9bvzr",
       "date": "2026-08-27",
       "customer": "皇昌",
       "order": "A11688",
@@ -196,7 +196,7 @@
       "note": "使用18M"
     },
     {
-      "id": "mu29fbql5v7a8",
+      "id": "mu29gmvfi0jew",
       "date": "2026-08-27",
       "customer": "皇昌",
       "order": "A11688",
@@ -209,7 +209,7 @@
       "note": "使用14M"
     },
     {
-      "id": "mu29fbqlldxyl",
+      "id": "mu29gmvfa843h",
       "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U91217",
@@ -222,7 +222,7 @@
       "note": "使用SD550W代(阿源告知)"
     },
     {
-      "id": "mu29fbql4s2zz",
+      "id": "mu29gmvfdyl00",
       "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U91225",
@@ -235,7 +235,7 @@
       "note": "使用SD550W代(阿源告知)"
     },
     {
-      "id": "mu29fbqluo4dw",
+      "id": "mu29gmvf0k7ti",
       "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U91233",
@@ -248,7 +248,7 @@
       "note": "使用SD550W代(阿源告知)"
     },
     {
-      "id": "mu29fbqlvbhnc",
+      "id": "mu29gmvfr994q",
       "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U01231",
@@ -261,7 +261,7 @@
       "note": "使用18M(6.9*2+3.7)"
     },
     {
-      "id": "mu29fbql39zxb",
+      "id": "mu29gmvff8xwn",
       "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U01239",
@@ -274,7 +274,7 @@
       "note": "使用18M(6.9*2+3.7)"
     },
     {
-      "id": "mu29fbqln4iff",
+      "id": "mu29gmvfntkm2",
       "date": "2026-09-15",
       "customer": "協泰營造",
       "order": "U92511",
@@ -287,7 +287,7 @@
       "note": "使用箍筋8.5M(6.5M綁2M)"
     },
     {
-      "id": "mu29fbqlrp0rj",
+      "id": "mu29gmvfjm1hh",
       "date": "2026-09-15",
       "customer": "協泰營造",
       "order": "U92511",
@@ -300,7 +300,7 @@
       "note": "使用箍筋12M(8.2M綁3.8M)"
     },
     {
-      "id": "mu29fbqlksf7x",
+      "id": "mu29gmvf8q9w4",
       "date": "2026-09-15",
       "customer": "桃園加工",
       "order": "P10278",
@@ -313,7 +313,7 @@
       "note": "使用16.1M(9.9M+5.9M)"
     },
     {
-      "id": "mu29fbqlw2emf",
+      "id": "mu29gmvfy6e9u",
       "date": "2026-09-15",
       "customer": "桃園加工",
       "order": "P10278",
@@ -326,7 +326,7 @@
       "note": "使用20.1M(9.9M*2)"
     },
     {
-      "id": "mu29fbqlkf75d",
+      "id": "mu29gmvf5nbpq",
       "date": "2026-09-15",
       "customer": "桃園加工",
       "order": "P10278",
@@ -341,16 +341,16 @@
   ],
   "quotaLog": [
     {
-      "id": "mu29fbqlmrcbg",
+      "id": "mu29gmvfasmq5",
       "date": "2026-08-23",
       "amount": 10080
     },
     {
-      "id": "mu29fbqlkvckd",
+      "id": "mu29gmvf1owmt",
       "date": "2026-09-09",
       "amount": 28780
     }
   ],
   "settings": {},
-  "savedAt": "2026-09-15T05:58:20.888Z"
+  "savedAt": "2026-09-15T05:58:25.227Z"
 }
