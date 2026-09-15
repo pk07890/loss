@@ -337,19 +337,6 @@
       "loss": 0.3,
       "waste": 1422,
       "note": "使用13.1M(6.4*2)"
-    },
-    {
-      "id": "mu29tgkdc44hr",
-      "date": "2026-09-15",
-      "customer": "工信",
-      "order": "",
-      "steel": "",
-      "dia": "",
-      "len": "",
-      "qty": null,
-      "loss": null,
-      "waste": 1000,
-      "note": ""
     }
   ],
   "quotaLog": [
@@ -365,5 +352,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-09-15T06:08:23.582Z"
+  "savedAt": "2026-09-15T06:08:35.569Z"
 }
