@@ -337,6 +337,19 @@
       "loss": 0.3,
       "waste": 1422,
       "note": "使用13.1M(6.4*2)"
+    },
+    {
+      "id": "mu29fnyezatmt",
+      "date": "2026-09-15",
+      "customer": "test",
+      "order": "",
+      "steel": "SD420W",
+      "dia": "D16",
+      "len": "",
+      "qty": null,
+      "loss": 1000,
+      "waste": null,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -352,5 +365,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-09-15T05:57:24.141Z"
+  "savedAt": "2026-09-15T05:57:39.974Z"
 }
