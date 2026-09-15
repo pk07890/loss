@@ -1,8 +1,8 @@
 {
   "records": [
     {
-      "id": "mtwm3hw1pa8hl",
-      "date": "",
+      "id": "mu29fbqkk62b3",
+      "date": "2026-07-24",
       "customer": "工信",
       "order": "A11647",
       "steel": "SD420W",
@@ -14,8 +14,8 @@
       "note": "使用12M"
     },
     {
-      "id": "mtwm3hw1p3g65",
-      "date": "",
+      "id": "mu29fbqkld0x2",
+      "date": "2026-07-24",
       "customer": "工信",
       "order": "A11647",
       "steel": "SD420W",
@@ -27,8 +27,8 @@
       "note": "使用15M(9.7+5.1)"
     },
     {
-      "id": "mtwm3hw161w8z",
-      "date": "",
+      "id": "mu29fbql7yxht",
+      "date": "2026-07-22",
       "customer": "工信",
       "order": "P95617",
       "steel": "SD420W",
@@ -40,8 +40,8 @@
       "note": "使用16M(11.3+4.5)"
     },
     {
-      "id": "mtwm3hw14kzan",
-      "date": "",
+      "id": "mu29fbqlxz6ly",
+      "date": "2026-07-22",
       "customer": "工信",
       "order": "P95617",
       "steel": "SD420W",
@@ -53,8 +53,8 @@
       "note": "使用16M(10.6+4.5)"
     },
     {
-      "id": "mtwm3hw1aw3ze",
-      "date": "",
+      "id": "mu29fbqlsvhhz",
+      "date": "2026-08-14",
       "customer": "皇昌",
       "order": "A11666",
       "steel": "SD420W",
@@ -66,8 +66,8 @@
       "note": "使用13M"
     },
     {
-      "id": "mtwm3hw1oojtj",
-      "date": "",
+      "id": "mu29fbqlvwwi0",
+      "date": "2026-08-13",
       "customer": "皇昌",
       "order": "A11667",
       "steel": "SD420W",
@@ -79,8 +79,8 @@
       "note": "使用16M"
     },
     {
-      "id": "mtwm3hw1kudyl",
-      "date": "",
+      "id": "mu29fbqlbdvn3",
+      "date": "2026-08-12",
       "customer": "皇昌",
       "order": "P97395",
       "steel": "SD420W",
@@ -92,8 +92,8 @@
       "note": "使用18M(8.3*2)"
     },
     {
-      "id": "mtwm3hw1zyfi9",
-      "date": "",
+      "id": "mu29fbql3ywq6",
+      "date": "2026-08-17",
       "customer": "皇昌",
       "order": "A11670",
       "steel": "SD420W",
@@ -105,8 +105,8 @@
       "note": "使用14M"
     },
     {
-      "id": "mtwm3hw1t5dok",
-      "date": "",
+      "id": "mu29fbqlijeb6",
+      "date": "2026-08-17",
       "customer": "",
       "order": "",
       "steel": "SD420W",
@@ -118,8 +118,8 @@
       "note": ""
     },
     {
-      "id": "mtwm3hw1xgjoo",
-      "date": "",
+      "id": "mu29fbqlzd4p7",
+      "date": "2026-08-28",
       "customer": "皇昌",
       "order": "P10015",
       "steel": "SD420W",
@@ -131,8 +131,8 @@
       "note": "使用14M"
     },
     {
-      "id": "mtwm3hw1foirx",
-      "date": "",
+      "id": "mu29fbqldd06f",
+      "date": "2026-08-28",
       "customer": "皇昌",
       "order": "P10015",
       "steel": "SD420W",
@@ -144,8 +144,8 @@
       "note": "使用12M"
     },
     {
-      "id": "mtwm3hw1oj60e",
-      "date": "",
+      "id": "mu29fbql6n7zt",
+      "date": "2026-08-28",
       "customer": "皇昌",
       "order": "P10015",
       "steel": "SD420W",
@@ -157,8 +157,8 @@
       "note": "使用14M(6.7*2)"
     },
     {
-      "id": "mtwm3hw10s4iv",
-      "date": "",
+      "id": "mu29fbqll0cy4",
+      "date": "2026-08-28",
       "customer": "皇昌",
       "order": "A11690",
       "steel": "SD420W",
@@ -170,8 +170,8 @@
       "note": "使用12M"
     },
     {
-      "id": "mtwm3hw13g8nv",
-      "date": "",
+      "id": "mu29fbqlmm5v5",
+      "date": "2026-08-28",
       "customer": "皇昌",
       "order": "A11689",
       "steel": "SD420W",
@@ -183,8 +183,8 @@
       "note": "使用12M"
     },
     {
-      "id": "mtwm3hw1v4j35",
-      "date": "",
+      "id": "mu29fbqldbb52",
+      "date": "2026-08-27",
       "customer": "皇昌",
       "order": "A11688",
       "steel": "SD420W",
@@ -196,8 +196,8 @@
       "note": "使用18M"
     },
     {
-      "id": "mtwm3hw14rxmk",
-      "date": "",
+      "id": "mu29fbql5v7a8",
+      "date": "2026-08-27",
       "customer": "皇昌",
       "order": "A11688",
       "steel": "SD420W",
@@ -209,8 +209,8 @@
       "note": "使用14M"
     },
     {
-      "id": "mtwm3hw1hyrp0",
-      "date": "",
+      "id": "mu29fbqlldxyl",
+      "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U91217",
       "steel": "SD490W",
@@ -222,8 +222,8 @@
       "note": "使用SD550W代(阿源告知)"
     },
     {
-      "id": "mtwm3hw14du2d",
-      "date": "",
+      "id": "mu29fbql4s2zz",
+      "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U91225",
       "steel": "SD490W",
@@ -235,8 +235,8 @@
       "note": "使用SD550W代(阿源告知)"
     },
     {
-      "id": "mtwm3hw192l6n",
-      "date": "",
+      "id": "mu29fbqluo4dw",
+      "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U91233",
       "steel": "SD490W",
@@ -248,8 +248,8 @@
       "note": "使用SD550W代(阿源告知)"
     },
     {
-      "id": "mtwm3hw1s33zk",
-      "date": "",
+      "id": "mu29fbqlvbhnc",
+      "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U01231",
       "steel": "SD550W",
@@ -261,8 +261,8 @@
       "note": "使用18M(6.9*2+3.7)"
     },
     {
-      "id": "mtwm3hw12gfhw",
-      "date": "",
+      "id": "mu29fbql39zxb",
+      "date": "2026-09-10",
       "customer": "桃園加工",
       "order": "U01239",
       "steel": "SD550W",
@@ -274,8 +274,8 @@
       "note": "使用18M(6.9*2+3.7)"
     },
     {
-      "id": "mtwm3hw1a7vzr",
-      "date": "",
+      "id": "mu29fbqln4iff",
+      "date": "2026-09-15",
       "customer": "協泰營造",
       "order": "U92511",
       "steel": "SD280W",
@@ -285,20 +285,72 @@
       "loss": 2,
       "waste": 875,
       "note": "使用箍筋8.5M(6.5M綁2M)"
+    },
+    {
+      "id": "mu29fbqlrp0rj",
+      "date": "2026-09-15",
+      "customer": "協泰營造",
+      "order": "U92511",
+      "steel": "SD280W",
+      "dia": "D16",
+      "len": "8.2",
+      "qty": 980,
+      "loss": 3.8,
+      "waste": 5810,
+      "note": "使用箍筋12M(8.2M綁3.8M)"
+    },
+    {
+      "id": "mu29fbqlksf7x",
+      "date": "2026-09-15",
+      "customer": "桃園加工",
+      "order": "P10278",
+      "steel": "SD490W",
+      "dia": "D32",
+      "len": "15.8",
+      "qty": 700,
+      "loss": 0.3,
+      "waste": 1342,
+      "note": "使用16.1M(9.9M+5.9M)"
+    },
+    {
+      "id": "mu29fbqlw2emf",
+      "date": "2026-09-15",
+      "customer": "桃園加工",
+      "order": "P10278",
+      "steel": "SD490W",
+      "dia": "D36",
+      "len": "9.9",
+      "qty": 1200,
+      "loss": 0.3,
+      "waste": 1422,
+      "note": "使用20.1M(9.9M*2)"
+    },
+    {
+      "id": "mu29fbqlkf75d",
+      "date": "2026-09-15",
+      "customer": "桃園加工",
+      "order": "P10278",
+      "steel": "SD490W",
+      "dia": "D36",
+      "len": "6.4",
+      "qty": 1200,
+      "loss": 0.3,
+      "waste": 1422,
+      "note": "使用13.1M(6.4*2)"
     }
   ],
   "quotaLog": [
     {
-      "id": "mtwm3hw1cylln",
+      "id": "mu29fbqlmrcbg",
       "date": "2026-08-23",
       "amount": 10080
     },
     {
-      "id": "mtwm3hw1z8kq8",
+      "id": "mu29fbqlkvckd",
       "date": "2026-09-09",
       "amount": 28780
     }
   ],
   "settings": {},
-  "savedAt": "2026-09-11T07:43:42.708Z"
+  "savedAt": "2026-09-15T05:57:24.141Z"
 }
