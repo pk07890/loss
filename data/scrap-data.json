@@ -274,19 +274,6 @@
       "note": "使用18M(6.9*2+3.7)"
     },
     {
-      "id": "muqodbvniapqx",
-      "date": "2026-09-15",
-      "customer": "協泰營造",
-      "order": "U92511",
-      "steel": "SD280W",
-      "dia": "D16",
-      "len": "8.2",
-      "qty": 980,
-      "loss": 3.8,
-      "waste": 5810,
-      "note": "使用箍筋12M(8.2M綁3.8M)"
-    },
-    {
       "id": "muqodbvn9v1rb",
       "date": "2026-09-15",
       "customer": "桃園加工",
@@ -339,5 +326,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-02T08:04:18.668Z"
+  "savedAt": "2026-10-02T08:04:20.406Z"
 }
