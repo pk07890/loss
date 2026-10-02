@@ -207,32 +207,6 @@
       "loss": 1.4,
       "waste": 4140,
       "note": "使用14M"
-    },
-    {
-      "id": "muqodbvn5q9g9",
-      "date": "2026-09-10",
-      "customer": "桃園加工",
-      "order": "U01231",
-      "steel": "SD550W",
-      "dia": "D32",
-      "len": "6.9",
-      "qty": 179,
-      "loss": 0.5,
-      "waste": 286,
-      "note": "使用18M(6.9*2+3.7)"
-    },
-    {
-      "id": "muqodbvnr3725",
-      "date": "2026-09-10",
-      "customer": "桃園加工",
-      "order": "U01239",
-      "steel": "SD550W",
-      "dia": "D32",
-      "len": "6.9",
-      "qty": 208,
-      "loss": 0.5,
-      "waste": 333,
-      "note": "使用18M(6.9*2+3.7)"
     }
   ],
   "quotaLog": [
@@ -248,5 +222,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-02T08:04:31.758Z"
+  "savedAt": "2026-10-02T08:04:33.598Z"
 }
