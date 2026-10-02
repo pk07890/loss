@@ -118,32 +118,6 @@
       "note": ""
     },
     {
-      "id": "muqodbvnu3atw",
-      "date": "2026-08-28",
-      "customer": "皇昌",
-      "order": "P10015",
-      "steel": "SD420W",
-      "dia": "D29",
-      "len": "13.6",
-      "qty": 262,
-      "loss": 0.4,
-      "waste": 532,
-      "note": "使用14M"
-    },
-    {
-      "id": "muqodbvnlqkde",
-      "date": "2026-08-28",
-      "customer": "皇昌",
-      "order": "P10015",
-      "steel": "SD420W",
-      "dia": "D29",
-      "len": "11.6",
-      "qty": 150,
-      "loss": 0.4,
-      "waste": 305,
-      "note": "使用12M"
-    },
-    {
       "id": "muqodbvnwsrs9",
       "date": "2026-08-28",
       "customer": "皇昌",
@@ -222,5 +196,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-02T08:04:33.598Z"
+  "savedAt": "2026-10-02T08:04:35.425Z"
 }
