@@ -118,19 +118,6 @@
       "note": ""
     },
     {
-      "id": "muqodbvntpin5",
-      "date": "2026-08-28",
-      "customer": "皇昌",
-      "order": "A11690",
-      "steel": "SD420W",
-      "dia": "D29",
-      "len": "10.6",
-      "qty": 928,
-      "loss": 1.4,
-      "waste": 6600,
-      "note": "使用12M"
-    },
-    {
       "id": "muqodbvnkrx18",
       "date": "2026-08-28",
       "customer": "皇昌",
@@ -183,5 +170,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-02T08:04:39.268Z"
+  "savedAt": "2026-10-02T08:04:40.295Z"
 }
