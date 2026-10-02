@@ -209,19 +209,6 @@
       "note": "使用14M"
     },
     {
-      "id": "muqodbvnim1c4",
-      "date": "2026-09-10",
-      "customer": "桃園加工",
-      "order": "U91233",
-      "steel": "SD490W",
-      "dia": "D25",
-      "len": "",
-      "qty": null,
-      "loss": null,
-      "waste": 518,
-      "note": "使用SD550W代(阿源告知)"
-    },
-    {
       "id": "muqodbvn5q9g9",
       "date": "2026-09-10",
       "customer": "桃園加工",
@@ -261,5 +248,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-02T08:04:29.882Z"
+  "savedAt": "2026-10-02T08:04:31.758Z"
 }
