@@ -53,19 +53,6 @@
       "note": "使用16M(10.6+4.5)"
     },
     {
-      "id": "muqodbvnq5tyl",
-      "date": "2026-08-14",
-      "customer": "皇昌",
-      "order": "A11666",
-      "steel": "SD420W",
-      "dia": "D29",
-      "len": "12.6",
-      "qty": 868,
-      "loss": 0.4,
-      "waste": 1764,
-      "note": "使用13M"
-    },
-    {
       "id": "muqodbvneba1k",
       "date": "2026-08-13",
       "customer": "皇昌",
@@ -90,19 +77,6 @@
       "loss": 1.4,
       "waste": 2212,
       "note": "使用18M(8.3*2)"
-    },
-    {
-      "id": "muqodbvnukfd8",
-      "date": "2026-08-17",
-      "customer": "",
-      "order": "",
-      "steel": "SD420W",
-      "dia": "D13",
-      "len": "油汙鋼筋",
-      "qty": null,
-      "loss": null,
-      "waste": 1500,
-      "note": ""
     }
   ],
   "quotaLog": [
@@ -118,5 +92,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-02T08:04:45.999Z"
+  "savedAt": "2026-10-02T08:04:48.929Z"
 }
