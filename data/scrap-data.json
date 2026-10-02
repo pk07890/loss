@@ -1,19 +1,6 @@
 {
   "records": [
     {
-      "id": "muqodbvn3kja1",
-      "date": "2026-07-22",
-      "customer": "工信",
-      "order": "P95617",
-      "steel": "SD420W",
-      "dia": "D29",
-      "len": "11.3",
-      "qty": 137,
-      "loss": 0.2,
-      "waste": 139,
-      "note": "使用16M(11.3+4.5)"
-    },
-    {
       "id": "muqodbvn2opdb",
       "date": "2026-07-22",
       "customer": "工信",
@@ -40,5 +27,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-02T08:04:55.481Z"
+  "savedAt": "2026-10-02T08:04:56.704Z"
 }
