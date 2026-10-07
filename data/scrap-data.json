@@ -415,6 +415,19 @@
       "loss": 0.7,
       "waste": 600,
       "note": "使用18M(9.3+8.0)"
+    },
+    {
+      "id": "muxgauvs59vwo",
+      "date": "2026-10-06",
+      "customer": "品興營造",
+      "order": "M52906",
+      "steel": "SD550W",
+      "dia": "D32",
+      "len": "",
+      "qty": 300,
+      "loss": 0.5,
+      "waste": 959,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -430,5 +443,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-06T09:01:12.892Z"
+  "savedAt": "2026-10-07T01:50:44.440Z"
 }
