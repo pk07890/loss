@@ -441,6 +441,19 @@
       "loss": 0.5,
       "waste": 959,
       "note": ""
+    },
+    {
+      "id": "mv8uxo2mzmlhp",
+      "date": "2026-10-15",
+      "customer": "柏威營造",
+      "order": "U9088",
+      "steel": "SD490W",
+      "dia": "D32",
+      "len": "",
+      "qty": null,
+      "loss": null,
+      "waste": 13300,
+      "note": "客戶退貨(鋼筋裂紋)"
     }
   ],
   "quotaLog": [
@@ -456,5 +469,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-07T01:51:20.612Z"
+  "savedAt": "2026-10-15T01:25:51.263Z"
 }
