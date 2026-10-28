@@ -467,6 +467,19 @@
       "loss": null,
       "waste": 13080,
       "note": "9/30客戶退貨(鋼筋裂紋)-(10月報告止)"
+    },
+    {
+      "id": "mvs2zr9kbx9ua",
+      "date": "2026-10-28",
+      "customer": "麥寮汽電",
+      "order": "K08876",
+      "steel": "SD420W",
+      "dia": "D29",
+      "len": "13.4",
+      "qty": 539,
+      "loss": 1660,
+      "waste": null,
+      "note": "使用14M"
     }
   ],
   "quotaLog": [
@@ -487,5 +500,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-15T05:52:19.493Z"
+  "savedAt": "2026-10-28T12:19:02.984Z"
 }
