@@ -480,6 +480,19 @@
       "loss": 1660,
       "waste": null,
       "note": "使用14M"
+    },
+    {
+      "id": "mvs30seov68dj",
+      "date": "2026-10-28",
+      "customer": "麥寮汽電",
+      "order": "K08876",
+      "steel": "SD420W",
+      "dia": "D29",
+      "len": "12.4",
+      "qty": 109,
+      "loss": 350,
+      "waste": null,
+      "note": "使用13M"
     }
   ],
   "quotaLog": [
@@ -500,5 +513,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-28T12:19:02.984Z"
+  "savedAt": "2026-10-28T12:19:51.120Z"
 }
