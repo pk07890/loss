@@ -558,6 +558,19 @@
       "loss": null,
       "waste": 6936,
       "note": ""
+    },
+    {
+      "id": "mvyxsqiwtsobn",
+      "date": "2026-10-05",
+      "customer": "三井工程",
+      "order": "11724",
+      "steel": "SD490W",
+      "dia": "D36",
+      "len": "14.1",
+      "qty": 415,
+      "loss": 0.9,
+      "waste": 2950.9,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -578,5 +591,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:26:21.838Z"
+  "savedAt": "2026-11-02T07:28:00.584Z"
 }
