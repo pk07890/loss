@@ -623,6 +623,19 @@
       "loss": 2,
       "waste": 1292,
       "note": ""
+    },
+    {
+      "id": "mvyy7z891kwfs",
+      "date": "2026-10-20",
+      "customer": "工信工程",
+      "order": "A11742",
+      "steel": "SD420W",
+      "dia": "D16",
+      "len": "12",
+      "qty": 53,
+      "loss": 3,
+      "waste": 248,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -643,5 +656,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:38:15.873Z"
+  "savedAt": "2026-11-02T07:39:51.705Z"
 }
