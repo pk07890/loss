@@ -493,6 +493,19 @@
       "loss": 0.6,
       "waste": 350,
       "note": "使用13M"
+    },
+    {
+      "id": "mvyxfrslelpuj",
+      "date": "2026-10-12",
+      "customer": "華偉鋼鐵",
+      "order": "A11728",
+      "steel": "SD420W",
+      "dia": "D16",
+      "len": "8",
+      "qty": 5128,
+      "loss": 1.8,
+      "waste": 7200,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -513,5 +526,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-10-28T12:20:50.847Z"
+  "savedAt": "2026-11-02T07:17:55.701Z"
 }
