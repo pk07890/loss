@@ -571,6 +571,19 @@
       "loss": 0.9,
       "waste": 2950.9,
       "note": ""
+    },
+    {
+      "id": "mvyxwrae26ynh",
+      "date": "2026-10-14",
+      "customer": "東和物流",
+      "order": "A11734",
+      "steel": "SD420W",
+      "dia": "D36",
+      "len": "",
+      "qty": null,
+      "loss": null,
+      "waste": 6320,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -591,5 +604,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:28:00.584Z"
+  "savedAt": "2026-11-02T07:31:08.199Z"
 }
