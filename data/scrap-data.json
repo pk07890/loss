@@ -120,7 +120,7 @@
     {
       "id": "muqoh3qtoooyi",
       "date": "2026-08-27",
-      "customer": "皇昌",
+      "customer": "皇昌營造",
       "order": "P10015",
       "steel": "SD420W",
       "dia": "D29",
@@ -656,5 +656,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:39:51.705Z"
+  "savedAt": "2026-11-02T07:40:05.952Z"
 }
