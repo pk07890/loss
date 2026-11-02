@@ -506,6 +506,19 @@
       "loss": 1.8,
       "waste": 7200,
       "note": ""
+    },
+    {
+      "id": "mvyxj44pee1td",
+      "date": "2026-10-12",
+      "customer": "三井工程",
+      "order": "A11727",
+      "steel": "SD420W",
+      "dia": "D32",
+      "len": "17",
+      "qty": 120,
+      "loss": 1,
+      "waste": 767,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -526,5 +539,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:17:55.701Z"
+  "savedAt": "2026-11-02T07:20:31.658Z"
 }
