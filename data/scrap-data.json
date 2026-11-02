@@ -42,7 +42,7 @@
     {
       "id": "muqoh3qt7shr8",
       "date": "2026-07-21",
-      "customer": "工信",
+      "customer": "工信工程",
       "order": "P95617",
       "steel": "SD420W",
       "dia": "D29",
@@ -656,5 +656,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:42:05.053Z"
+  "savedAt": "2026-11-02T07:42:12.184Z"
 }
