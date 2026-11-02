@@ -610,6 +610,19 @@
       "loss": 2.4,
       "waste": 7322,
       "note": ""
+    },
+    {
+      "id": "mvyy5xa9fg3cc",
+      "date": "2026-10-19",
+      "customer": "大陸工程",
+      "order": "A11740",
+      "steel": "SD420W",
+      "dia": "D19",
+      "len": "12",
+      "qty": 287,
+      "loss": 2,
+      "waste": 1292,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -630,5 +643,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:35:36.426Z"
+  "savedAt": "2026-11-02T07:38:15.873Z"
 }
