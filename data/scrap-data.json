@@ -545,6 +545,19 @@
       "loss": null,
       "waste": 5943,
       "note": ""
+    },
+    {
+      "id": "mvyxqmbyjeuv4",
+      "date": "2026-10-06",
+      "customer": "德欣先進",
+      "order": "A11725",
+      "steel": "SD490W",
+      "dia": "D36",
+      "len": "10.1",
+      "qty": 439,
+      "loss": null,
+      "waste": 6936,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -565,5 +578,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:25:32.205Z"
+  "savedAt": "2026-11-02T07:26:21.838Z"
 }
