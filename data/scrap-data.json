@@ -584,6 +584,19 @@
       "loss": null,
       "waste": 6320,
       "note": ""
+    },
+    {
+      "id": "mvyy0j7ws09jm",
+      "date": "2026-10-14",
+      "customer": "",
+      "order": "A11736",
+      "steel": "SD420W",
+      "dia": "D32",
+      "len": "12.1",
+      "qty": 320,
+      "loss": 0.9,
+      "waste": 1840,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -604,5 +617,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:31:08.199Z"
+  "savedAt": "2026-11-02T07:34:04.364Z"
 }
