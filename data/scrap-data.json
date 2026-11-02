@@ -588,7 +588,7 @@
     {
       "id": "mvyy0j7ws09jm",
       "date": "2026-10-14",
-      "customer": "",
+      "customer": "榮工工程",
       "order": "A11736",
       "steel": "SD420W",
       "dia": "D32",
@@ -630,5 +630,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T07:35:16.117Z"
+  "savedAt": "2026-11-02T07:35:36.426Z"
 }
