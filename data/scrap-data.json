@@ -636,6 +636,19 @@
       "loss": 3,
       "waste": 248,
       "note": ""
+    },
+    {
+      "id": "mw0gv54z8yxro",
+      "date": "2026-11-08",
+      "customer": "義力營造",
+      "order": "M33615",
+      "steel": "SD550W",
+      "dia": "D36",
+      "len": "",
+      "qty": null,
+      "loss": null,
+      "waste": 3385,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -656,5 +669,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-02T08:28:36.907Z"
+  "savedAt": "2026-11-03T09:09:31.715Z"
 }
