@@ -662,6 +662,19 @@
       "loss": null,
       "waste": 3400,
       "note": "料單部分無法配材，且軋鋼早已生產完畢"
+    },
+    {
+      "id": "mw3aw8t2bpmz7",
+      "date": "2026-11-06",
+      "customer": "工信工程",
+      "order": "P12633",
+      "steel": "SD420W",
+      "dia": "D29",
+      "len": "10.1",
+      "qty": 553,
+      "loss": null,
+      "waste": 8146,
+      "note": ""
     }
   ],
   "quotaLog": [
@@ -687,5 +700,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-05T01:35:48.031Z"
+  "savedAt": "2026-11-05T08:45:43.959Z"
 }
