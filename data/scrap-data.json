@@ -675,6 +675,19 @@
       "loss": null,
       "waste": 8146,
       "note": ""
+    },
+    {
+      "id": "mwkorzaunfrir",
+      "date": "2026-11-17",
+      "customer": "中華工程",
+      "order": "P13209",
+      "steel": "SD420W",
+      "dia": "D19",
+      "len": "14",
+      "qty": 8649,
+      "loss": 0.3,
+      "waste": 6000,
+      "note": "8.5+5.2"
     }
   ],
   "quotaLog": [
@@ -705,5 +718,5 @@
     }
   ],
   "settings": {},
-  "savedAt": "2026-11-17T07:28:12.430Z"
+  "savedAt": "2026-11-17T12:46:24.631Z"
 }
